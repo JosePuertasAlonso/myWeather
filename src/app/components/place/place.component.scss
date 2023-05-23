@@ -1,0 +1,83 @@
+.place_img{
+    background-color: black;
+    position: relative;
+    width: 100%;
+    height: 30em;
+    background-image: url("https://historia.nationalgeographic.com.es/medio/2023/03/08/fotografia-de-las-tres-grandes-piramides-en-la-llanura-de-giza_56999db0_230308100940_1280x831.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+
+.place_img::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.place_data{
+  position: relative;
+  left: 25%;
+  top: 5%;
+  width: 50%;
+  height:90%;
+  background-color: white;
+  border-radius: 1em;
+  opacity: 0.95;
+  .container-1{
+    display: flex;
+    flex-direction: row;
+    height: 15em;
+    padding-left: 2em;
+    padding-top: 2em;
+    border-radius: 1em;
+
+    .place_name{
+      margin: 0;
+      color:black;
+      font-size: 2.5em;
+      opacity: 1;
+    }
+    .place_state{
+      margin:0;
+      margin-top: .5em;
+      margin-left: 1em;
+      color:black;
+      font-size: 1.3em;
+      opacity: 1;
+    }
+
+    #icon{
+      display: flex;
+      align-items: center;
+      margin-left: 3em;
+      border-radius: 25px;
+      font-size: 9em;
+      color:black;
+      padding: 30px;
+      border: 1px solid;
+    }
+
+
+  }
+
+}
+
+.place_weather{
+  display: grid;
+  grid-template-columns: auto auto;
+  position: relative;
+  left: 5%;
+
+  .place_atributes{
+    font-size: 1.3em;
+  }
+}
+
+.more-details{
+  display: flex;
+}
+
+

@@ -1,0 +1,27 @@
+<div *ngIf="place">
+  <div class="place_img">
+    <div class="place_data">
+      <div class="container-1">
+        <div>
+          <p class="place_name">{{place.name}}</p>
+          <p class="place_state">{{apiPlace.weather[0].main}}</p>
+        </div>
+        <i class="{{place.icon}}" id="icon"></i>
+      </div>
+      <hr style="width: 100%;">
+      <div class="place_weather">
+        <p class="place_atributes">Description: {{apiPlace.weather[0].description}}</p>
+        <p class="place_atributes">Temperature: {{place.temp}}</p>
+        <p class="place_atributes">Maximum Temperature: {{place.temp_max}}°C</p>
+        <p class="place_atributes">Minimum Temperature: {{place.temp_min}}°C</p>
+      </div>
+    </div>
+  </div>
+  <h1 style="margin-left: 1em;">More weather details</h1>
+  <hr style="width: 100%; position: relative;">
+  <div class="more-details">
+    <app-card title="Humidity" icon='fal fa-humidity' value="{{apiPlace.main.humidity}}%"></app-card>
+    <app-card title="Humidity" icon='fas fa-cloud' value="{{apiPlace.main.humidity}}%"></app-card>
+
+  </div>
+</div>

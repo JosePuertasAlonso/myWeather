@@ -1,0 +1,14 @@
+
+
+<div class="main_places">
+  <li class="card" *ngFor="let principal of principales">
+    <a [routerLink]="['/place', principal.name]" [state]="{ place: principal }">
+      <div class="info-card">
+        <p class="nombre-ciudad">{{principal.name}}</p>
+        <p class="temp-ciudad">{{principal.temp}}ºC</p>
+        <p class="descripcion-ciudad">{{principal.temp}}</p>
+      </div>
+    </a>
+  </li>
+</div>
+
