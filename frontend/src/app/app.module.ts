@@ -11,13 +11,15 @@ import { PlaceComponent } from './components/place/place.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/card/card.component';
+import { CardWeatherhourComponent } from './components/card-weatherhour/card-weatherhour.component';
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     PlaceComponent,
     TopMenuComponent,
-    CardComponent
+    CardComponent,
+    CardWeatherhourComponent
   ],
   imports: [
     BrowserModule,

@@ -3,5 +3,8 @@ export interface Place {
     temp_max: any;
     temp_min: any;
     temp: any;
+    feelLike: any;
+    sunrise: any;
+    sunset: any;
     icon: any;
   }

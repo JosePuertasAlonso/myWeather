@@ -12,6 +12,8 @@ import { Location } from '@angular/common';
 export class PlaceComponent implements OnInit{
   place: Place | undefined;
   apiPlace:any;
+  apiPlaceHours:any;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -52,10 +54,24 @@ export class PlaceComponent implements OnInit{
           console.error(error); // Maneja los errores en caso de que ocurran
         }
       );
-      }
+      this.weatherService.obtenerTiempoCiudadHoras(name).subscribe(
+        (data) => {
+          this.apiPlaceHours = data; // Guarda los datos en la variable apiPlace
+          console.log(this.apiPlaceHours); // Imprime los datos en la consola
+        },
+        (error) => {
+          console.error(error); // Maneja los errores en caso de que ocurran
+        }
+      );
+    }
     });
   }
-
+  calcularTemperatura(temp: number): string {
+    return String(this.weatherService.calcularTemp(temp)+ 'ºC');
+  }
+  obtenerIcono(weather:string):string{
+    return this.weatherService.weatherIcons[weather];
+  }
   goBack(): void {
     this.location.back();
   }

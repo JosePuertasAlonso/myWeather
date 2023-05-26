@@ -64,7 +64,6 @@
   }
 
 }
-
 .place_weather{
   display: grid;
   grid-template-columns: auto auto;
@@ -78,6 +77,33 @@
 
 .more-details{
   display: flex;
+  justify-content: center;
+  .section{
+    background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(90, 90, 90));
+    padding: 1em;
+    margin-left: 1em;
+    border-radius: 1em;
+    h2{
+      font-size: 1.5em;
+      margin-left: .5em;
+      color: white;
+    }
+    .components{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+.horizontal-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin:1em;
+  margin-bottom: 3em;
+  .hours {
+    display: inline-block;
+    white-space: normal;
+  }
 }
 
 

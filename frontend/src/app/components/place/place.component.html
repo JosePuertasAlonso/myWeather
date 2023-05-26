@@ -1,0 +1,66 @@
+<div *ngIf="place">
+  <div class="place_img">
+    <div class="place_data">
+      <div class="container-1">
+        <div style="width: 12em;">
+          <p class="place_name">{{place.name}}</p>
+          <p class="place_state">{{apiPlace.weather[0].main}}</p>
+        </div>
+        <i class="{{place.icon}}" id="icon"></i>
+      </div>
+      <hr style="width: 100%;">
+      <div class="place_weather">
+        <p class="place_atributes">Description: {{apiPlace.weather[0].description}}</p>
+        <p class="place_atributes">Temperature: {{place.temp}}°C</p>
+        <p class="place_atributes">Maximum Temperature: {{place.temp_max}}°C</p>
+        <p class="place_atributes">Minimum Temperature: {{place.temp_min}}°C</p>
+      </div>
+    </div>
+  </div>
+  <h1 style="margin-left: 1em;">More weather details</h1>
+  <hr style="width: 100%; position: relative;">
+  <div class="more-details">
+    <div class="section">
+      <h2>Main Conditions</h2>
+      <div class="components">
+        <app-card title="Humidity" icon='wi wi-humidity' value="{{apiPlace.main.humidity}}%"></app-card>
+        <app-card title="Preasure" icon='wi wi-barometer' value="{{apiPlace.main.pressure}}"></app-card>
+        <app-card title="Feels Like" icon='wi wi-thermometer' value="{{place.feelLike}}°C"></app-card>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Sun Times</h2>
+      <div class="components">
+        <app-card title="Sunrise" icon='wi wi-sunrise' value="{{place.sunrise}}"></app-card>
+        <app-card title="Sunset" icon='wi wi-sunset' value="{{place.sunset}}"></app-card>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Wind</h2>
+      <div class="components">
+        <app-card title="Speed" icon='wi wi-strong-wind' value="{{apiPlace.wind.speed}}m/s"></app-card>
+        <app-card title="Degrees" icon='wi wi-wind-direction' value="{{apiPlace.wind.deg}}°"></app-card>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Coordinates</h2>
+      <div class="components">
+        <app-card title="Latitude" icon='wi wi-direction-up' value="{{apiPlace.coord.lat}}"></app-card>
+        <app-card title="Longitude" icon='wi wi-direction-right' value="{{apiPlace.coord.lon}}"></app-card>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Clouds</h2>
+      <div class="components">
+        <app-card title="Clouds" icon='wi wi-cloudy' value="{{apiPlace.clouds.all}}%"></app-card>
+      </div>
+    </div>
+  </div>
+  <h1 style="margin-left: 1em;">Weather by hour</h1>
+  <hr style="width: 100%; position: relative;">
+  <div class="horizontal-list">
+    <div class="hours" *ngFor="let hora of apiPlaceHours.list.slice(0,7)">
+      <app-card-weatherhour [weather]="hora.weather[0].main" [icon]="obtenerIcono(hora.weather[0].main)" [temp]="calcularTemperatura(hora.main.temp)" [hour]="hora.dt_txt | date:'shortTime'"></app-card-weatherhour>
+    </div>
+  </div>
+</div>
