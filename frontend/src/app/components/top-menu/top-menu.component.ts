@@ -10,6 +10,7 @@ import { Router } from '@angular/router'; // Importa el Router
 export class TopMenuComponent {
   ciudad: string = "";
   weatherData: any;
+  autentificado: boolean = false;
 
   constructor(
     private weatherService: WeatherService,
@@ -27,5 +28,8 @@ export class TopMenuComponent {
         });
 
     }
+  }
+  cerrarSesion() {
+    this.autentificado = false;
   }
 }

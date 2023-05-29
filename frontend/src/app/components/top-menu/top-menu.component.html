@@ -2,4 +2,20 @@
   <li routerLink="/main">Inicio</li>
   <input class="search_input" type="text" [(ngModel)]="ciudad" placeholder="Buscar ciudad" />
   <button class="search_button" (click)="buscarTiempo()">Buscar</button>
+
+  <div *ngIf="autentificado; else loginButton">
+    <!-- Botón y acción para cerrar sesión -->
+    <button (click)="cerrarSesion()">
+      <img src="ruta/imagen.png" alt="Imagen">
+      Cerrar sesión
+    </button>
+  </div>
+
+  <ng-template #loginButton>
+    <!-- Botón y enlace para iniciar sesión -->
+    <button [routerLink]="'/login'">
+      <img src="ruta/imagen.png" alt="Imagen">
+      Iniciar sesión
+    </button>
+  </ng-template>
 </div>

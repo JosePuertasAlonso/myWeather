@@ -9,6 +9,7 @@ import { Place } from './place';
 export class WeatherService {
   private apiKey = '37b81de24a316a9ab0780b781d48a33e';
   private baseUrl = 'https://api.openweathermap.org/data/2.5';
+  private springUrl = 'http://localhost:8080/api';
 
   public weatherIcons: { [key: string]: string } = {
     'Rain': 'wi wi-hail',
@@ -61,5 +62,14 @@ export class WeatherService {
     const minutes = "0" + date.getMinutes();
 
     return hours + ':' + minutes.substr(-2);
+  }
+
+  obtenerImagenScrapping(ciudad: string): Observable<any> {
+    const url = `${this.springUrl}/ciudad/data/?city=${ciudad}`;
+    return this.http.get(url);
+  }
+  login(usernameOrEmail: string, password: string): Observable<any> {
+    const url = `${this.springUrl}/users?username=${usernameOrEmail}&password=${password}`;
+    return this.http.post(url, { usernameOrEmail, password });
   }
 }

@@ -12,6 +12,7 @@ import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/card/card.component';
 import { CardWeatherhourComponent } from './components/card-weatherhour/card-weatherhour.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { CardWeatherhourComponent } from './components/card-weatherhour/card-wea
     PlaceComponent,
     TopMenuComponent,
     CardComponent,
-    CardWeatherhourComponent
+    CardWeatherhourComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -33,16 +33,7 @@ export class MainComponent implements OnInit{
         });
     }
   }
-/*
-  buscarTiempoPredefinido(ciudad: string): void {
-    this.weatherService.obtenerTiempoCiudad(ciudad)
-      .subscribe((data) => {
-        this.principales.push(data);
-      }, (error) => {
-        console.error(error);
-      });
-  }
-*/
+
   cargarDatosCiudad(ciudad: string): void {
     this.weatherService.cargarDatosCiudad(ciudad).subscribe(
       (place: Place) => {

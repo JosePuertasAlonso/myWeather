@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="form sign-in">
+    <h3>Log in</h3>
+    <hr style="margin-top: 1em;">
+    <h2>Are you already registered?</h2>
+
+    <label style="margin-top: 3em;">
+      <span>Username</span>
+      <input [(ngModel)]="usernameOrEmail" type="text">
+    </label>
+    <label>
+      <span>Password</span>
+      <input [(ngModel)]="password" type="password">
+    </label>
+    <button type="button" class="submit">Sign In</button>
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p style="font-size: 1.3em;">Sign up and enjoy our services</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>Are you already registered?</h2>
+        <p style="font-size: 1.2em;">If you already has an account, just sign in.</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <div class="form sign-up">
+      <h3>Sign up</h3>
+      <hr style="margin-top: 1em;">
+      <h2>Still not registered? Join us</h2>
+      <label>
+        <span>Username</span>
+        <input type="text" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" />
+      </label>
+      <button type="button" class="submit">Sign Up</button>
+    </div>
+  </div>
+</div>
+
+

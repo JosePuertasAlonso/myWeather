@@ -13,6 +13,7 @@ export class PlaceComponent implements OnInit{
   place: Place | undefined;
   apiPlace:any;
   apiPlaceHours:any;
+  imagenUrl: any;
 
 
   constructor(
@@ -24,6 +25,7 @@ export class PlaceComponent implements OnInit{
   ngOnInit() {
     this.getPlace();
     this.getApiPlace();
+    this.obtenerImagen();
   }
 
 
@@ -75,5 +77,24 @@ export class PlaceComponent implements OnInit{
   goBack(): void {
     this.location.back();
   }
+  obtenerImagen(): void {
+    this.route.paramMap.subscribe(params => {
+      const city = params.get('name');
+      console.log(city);
+      if (city) {
+        this.weatherService.obtenerImagenScrapping(city).subscribe(
+          (response: any) => {
+            console.log("Respuesta del servidor:", response); // Agrega este console.log para verificar la respuesta
+            this.imagenUrl = response[0].cityImg;
+            console.log("MI IMAGEN", this.imagenUrl);
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+      }
+    });
+  }
+
 
 }
