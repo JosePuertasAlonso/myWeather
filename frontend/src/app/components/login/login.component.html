@@ -6,13 +6,14 @@
 
     <label style="margin-top: 3em;">
       <span>Username</span>
-      <input [(ngModel)]="usernameOrEmail" type="text">
+      <input [(ngModel)]="username" type="text">
     </label>
     <label>
       <span>Password</span>
       <input [(ngModel)]="password" type="password">
     </label>
-    <button type="button" class="submit">Sign In</button>
+    <button type="button" class="submit" (click)="autenticarUsuario(username,password)">Sign In</button>
+    <span id="errorMessage" class="error-message"></span>
   </div>
   <div class="sub-cont">
     <div class="img">

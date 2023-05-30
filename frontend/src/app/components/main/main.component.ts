@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Place } from '../../services/place';
 
 
@@ -12,8 +13,13 @@ export class MainComponent implements OnInit{
   ciudad: string = "";
   weatherData: any;
   principales: Place [] = [];
+  favorites: Place [] = [];
 
-  constructor(private weatherService: WeatherService) {}
+
+  constructor(
+    private weatherService: WeatherService,
+    public authService: AuthService
+    ) {}
 
   ngOnInit() {
     let ciudades=["Barcelona","El Cairo","Granada","Nueva York","Rio de Janeiro"];

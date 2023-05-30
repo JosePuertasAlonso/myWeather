@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { Router } from '@angular/router'; // Importa el Router
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -10,11 +11,12 @@ import { Router } from '@angular/router'; // Importa el Router
 export class TopMenuComponent {
   ciudad: string = "";
   weatherData: any;
-  autentificado: boolean = false;
+  desplegable = false;
 
   constructor(
     private weatherService: WeatherService,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
     ) {}
 
     buscarTiempo() {
@@ -30,6 +32,6 @@ export class TopMenuComponent {
     }
   }
   cerrarSesion() {
-    this.autentificado = false;
+    this.authService.autenticado = false;
   }
 }

@@ -255,6 +255,12 @@ input {
   background: #000000;
   text-transform: uppercase;
 }
+.error-message {
+  display: block; /* Convertimos el elemento en bloque */
+  text-align: center; /* Centramos el texto */
+  margin-top: 1em; /* Espacio superior */
+  color: red; /* Color del texto en rojo */
+}
 
 .fb-btn {
   border: 2px solid #d3dae9;

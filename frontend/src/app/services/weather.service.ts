@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { Place } from './place';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class WeatherService {
     'Snow': 'wi wi-snow',
     'Drizzle': 'wi wi-rain',
     'Thunderstorm': 'wi wi-thunderstorm',
-    'Fog': 'wi wi-fog'
+    'Mist': 'wi wi-fog'
   };
   constructor(private http: HttpClient) {}
 
@@ -35,22 +35,33 @@ export class WeatherService {
     const url = `${this.baseUrl}/weather?q=${ciudad}&appid=${this.apiKey}`;
 
     return this.http.get<any>(url).pipe(
-      map((response: any) => {
-        const place: Place = {
-          name: response.name,
-          temp_max: this.calcularTemp(response.main.temp_max),
-          temp_min: this.calcularTemp(response.main.temp_min),
-          temp: this.calcularTemp(response.main.temp),
-          feelLike: this.calcularTemp(response.main.feels_like),
-          sunrise: this.calcularHora(response.sys.sunrise),
-          sunset: this.calcularHora(response.sys.sunset),
-          icon: this.weatherIcons[response.weather[0].main]
-        };
+      switchMap((response: any) => {
+        const image$ = this.obtenerImagenScrapping(response.name).pipe(
+          map((imageResponse: any) => imageResponse[0].cityImg)
+        );
 
-        return place;
+        return image$.pipe(
+          map((image: string) => {
+            const place: Place = {
+              name: response.name,
+              temp_max: this.calcularTemp(response.main.temp_max),
+              temp_min: this.calcularTemp(response.main.temp_min),
+              temp: this.calcularTemp(response.main.temp),
+              feelLike: this.calcularTemp(response.main.feels_like),
+              sunrise: this.calcularHora(response.sys.sunrise),
+              sunset: this.calcularHora(response.sys.sunset),
+              icon: this.weatherIcons[response.weather[0].main],
+              image: image
+            };
+
+            console.log("IMAGEN: " + place.image);
+            return place;
+          })
+        );
       })
     );
   }
+
 
   calcularTemp(temp: number): number {
     return Math.round(temp - 273);
@@ -68,8 +79,17 @@ export class WeatherService {
     const url = `${this.springUrl}/ciudad/data/?city=${ciudad}`;
     return this.http.get(url);
   }
-  login(usernameOrEmail: string, password: string): Observable<any> {
-    const url = `${this.springUrl}/users?username=${usernameOrEmail}&password=${password}`;
-    return this.http.post(url, { usernameOrEmail, password });
+
+  cargarImagen(ciudad: string): any {
+    this.obtenerImagenScrapping(ciudad).subscribe(
+      (response: any) => {
+        console.log("Respuesta del servidor:", response); // Agrega este console.log para verificar la respuesta
+        return response[0].cityImg;
+      }
+    );
+  }
+  obtenerUsuario(username: string): Observable<any> {
+    const url = `${this.springUrl}/users/search/findByUsername?username=`+ username; // Reemplaza 'auth' con la URL adecuada para la autenticación en tu backend de Spring Boot
+    return this.http.get(url)
   }
 }

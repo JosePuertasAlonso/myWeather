@@ -1,14 +1,40 @@
+<div class="title-cont">
+  <h1 class="title">Top world places</h1>
+  <hr>
+</div>
 
-
-<div class="main_places">
-  <li class="card" *ngFor="let principal of principales">
-    <a [routerLink]="['/place', principal.name]" [state]="{ place: principal }">
+<div class  ="main_places">
+  <li [routerLink]="['/place', principal.name]" [state]="{ place: principal }" style="background-image: url({{principal.image}});" class="card" *ngFor="let principal of principales">
       <div class="info-card">
         <p class="nombre-ciudad">{{principal.name}}</p>
-        <p class="temp-ciudad">{{principal.temp}}ºC</p>
-        <p class="descripcion-ciudad">{{principal.temp}}</p>
+        <div style="display: flex;flex-direction: column; align-items: center;padding: 0;">
+          <i id="icon" class="{{principal.icon}}" id="icon"></i>
+          <p class="temp-ciudad">{{principal.temp}}ºC</p>
+        </div>
       </div>
-    </a>
   </li>
+</div>
+<div *ngIf="authService.autenticado">
+  <div class="favorites-cont">
+    <h1 class="title">Your Favorites</h1>
+    <hr>
+  </div>
+  <div class  ="main_places">
+    <div *ngIf="favorites.length != 0">
+      <li [routerLink]="['/place', fav.name]" [state]="{ place: fav }" style="background-image: url({{fav.image}});" class="card" *ngFor="let fav of favorites">
+        <div class="info-card">
+          <p class="nombre-ciudad">{{fav.name}}</p>
+          <div style="display: flex;flex-direction: column; align-items: center;padding: 0;">
+            <i id="icon" class="{{fav.icon}}" id="icon"></i>
+            <p class="temp-ciudad">{{fav.temp}}ºC</p>
+          </div>
+        </div>
+      </li>
+    </div>
+    <div *ngIf="favorites.length == 0">
+      <p>No tienes ninguna ciudad guardada como favorita.Buscala.</p>
+    </div>
+
+  </div>
 </div>
 

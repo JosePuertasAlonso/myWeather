@@ -3,19 +3,23 @@
   <input class="search_input" type="text" [(ngModel)]="ciudad" placeholder="Buscar ciudad" />
   <button class="search_button" (click)="buscarTiempo()">Buscar</button>
 
-  <div *ngIf="autentificado; else loginButton">
-    <!-- Botón y acción para cerrar sesión -->
-    <button (click)="cerrarSesion()">
-      <img src="ruta/imagen.png" alt="Imagen">
-      Cerrar sesión
-    </button>
+  <div *ngIf="authService.isAutenticado(); else loginButton" (mouseenter)="desplegable = true" (mouseleave)="desplegable = false">    <!-- Botón y acción para cerrar sesión -->
+      <a class="logout">
+        <i id="icon" class="fa-solid fa-user"></i>
+        <p class="label">{{authService.username}}</p>
+        <i id="arrow" class="fa-solid fa-caret-down"></i>
+      </a>
+    <div (click)="cerrarSesion()" class="options" *ngIf="desplegable">
+      <i id="icon" class="fa-solid fa-power-off"></i>
+      <p>Cerrar Sesion</p>
+    </div>
   </div>
 
   <ng-template #loginButton>
-    <!-- Botón y enlace para iniciar sesión -->
-    <button [routerLink]="'/login'">
-      <img src="ruta/imagen.png" alt="Imagen">
-      Iniciar sesión
-    </button>
+
+    <a [routerLink]="['/login']" class="login">
+        <i id="icon" class="fa-solid fa-right-to-bracket"></i>
+        <p class="label">Iniciar sesión</p>
+    </a>
   </ng-template>
 </div>

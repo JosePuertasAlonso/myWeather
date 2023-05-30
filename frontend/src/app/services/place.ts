@@ -7,4 +7,5 @@ export interface Place {
     sunrise: any;
     sunset: any;
     icon: any;
+    image: any;
   }
