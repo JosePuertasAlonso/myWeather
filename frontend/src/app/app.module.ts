@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
@@ -13,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/card/card.component';
 import { CardWeatherhourComponent } from './components/card-weatherhour/card-weatherhour.component';
 import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +25,17 @@ import { LoginComponent } from './components/login/login.component';
     CardComponent,
     CardWeatherhourComponent,
     LoginComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

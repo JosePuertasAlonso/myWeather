@@ -4,11 +4,11 @@
   <button class="search_button" (click)="buscarTiempo()">Buscar</button>
 
   <div *ngIf="authService.isAutenticado(); else loginButton" (mouseenter)="desplegable = true" (mouseleave)="desplegable = false">    <!-- Botón y acción para cerrar sesión -->
-      <a class="logout">
+      <div class="logout">
         <i id="icon" class="fa-solid fa-user"></i>
-        <p class="label">{{authService.username}}</p>
+        <p class="label">{{authService.usuario.username}}</p>
         <i id="arrow" class="fa-solid fa-caret-down"></i>
-      </a>
+      </div>
     <div (click)="cerrarSesion()" class="options" *ngIf="desplegable">
       <i id="icon" class="fa-solid fa-power-off"></i>
       <p>Cerrar Sesion</p>
@@ -16,10 +16,9 @@
   </div>
 
   <ng-template #loginButton>
-
-    <a [routerLink]="['/login']" class="login">
+    <div [routerLink]="['/login']" class="login">
         <i id="icon" class="fa-solid fa-right-to-bracket"></i>
         <p class="label">Iniciar sesión</p>
-    </a>
+    </div>
   </ng-template>
 </div>

@@ -3,12 +3,15 @@
     <div class="place_data">
       <div class="container-1">
         <div style="width: 12em;">
-          <p class="place_name">{{place.name}}</p>
+          <div style="display: flex;">
+            <p class="place_name">{{place.name}}</p>
+            <i class="far fa-star"id="fav"></i>
+          </div>
           <p class="place_state">{{apiPlace.weather[0].main}}</p>
         </div>
         <i class="{{place.icon}}" id="icon"></i>
       </div>
-      <hr style="width: 100%;">
+      <hr style="width: 100%; margin-bottom: 2em; margin-top: 2em;">
       <div class="place_weather">
         <p class="place_atributes">Description: {{apiPlace.weather[0].description}}</p>
         <p class="place_atributes">Temperature: {{place.temp}}°C</p>
@@ -18,7 +21,7 @@
     </div>
   </div>
   <h1 style="margin-left: 1em;">More weather details</h1>
-  <hr style="width: 100%; position: relative;">
+  <hr style="width: 100%; position: relative;margin-bottom: 1em;">
   <div class="more-details">
     <div class="section">
       <h2>Main Conditions</h2>

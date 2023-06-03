@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,12 +11,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   username: string = "";
   password: string = "";
-  autenticado: boolean = false;
 
   constructor(
     private weatherService: WeatherService,
     private router: Router,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private dialog: MatDialog
   ) { }
 
   ngAfterViewInit() {
@@ -32,9 +33,11 @@ export class LoginComponent {
       if (username) {
         this.weatherService.obtenerUsuario(username).subscribe(
           (response: any) => {
-            if(response && response.length > 0 && response[0].username==username && response[0].password == password){
+            console.log('Usuario obtenido:', response);
+            if(response && response.username==username && response.password == password){
               this.authservice.autenticado = true;
               this.authservice.username = username;
+              this.authservice.usuario = response;
               this.router.navigateByUrl('/main');
             }
             else{
@@ -48,6 +51,27 @@ export class LoginComponent {
           },
         );
       }
-    }
+  }
+
+  agregarUsuario() {
+    const usuario = {
+      username: this.username,
+      password: this.password,
+    };
+
+    this.weatherService.agregarUsuario(usuario).subscribe(
+      response => {
+        console.log('Usuario agregado:', response);
+      },
+      error => {
+        console.error('Error al agregar el usuario:', error);
+        if (error.error === 'El username ya está en uso') {
+        } else {
+        }
+      }
+    );
+  }
+
+
 
 }

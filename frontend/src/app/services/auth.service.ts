@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Usuario } from './usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   username: string = "";
   autenticado: boolean = false;
+  usuario!: Usuario;
 
   constructor() { }
 

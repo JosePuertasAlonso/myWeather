@@ -13,8 +13,8 @@ export class MainComponent implements OnInit{
   ciudad: string = "";
   weatherData: any;
   principales: Place [] = [];
-  favorites: Place [] = [];
-
+  favoritos: Place [] = [];
+  nombre_favs: any [] = [];
 
   constructor(
     private weatherService: WeatherService,
@@ -27,6 +27,9 @@ export class MainComponent implements OnInit{
       this.cargarDatosCiudad(ciudades[i]);
     }
     console.log(this.principales);
+    if(this.authService.isAutenticado()){
+      this.cargarFavoritos(this.authService.usuario.id);
+    }
   }
 
   buscarTiempo() {
@@ -51,4 +54,37 @@ export class MainComponent implements OnInit{
       }
     );
   }
+
+  cargarFavoritos(idUser: string): void {
+    this.weatherService.obtenerFavoritos(idUser).subscribe(
+      (data: any[]) => {
+        this.nombre_favs = data;
+        console.log(this.nombre_favs);
+
+        for (let i = 0; i < this.nombre_favs.length; i++) {
+          this.cargarDatosFavorito(this.nombre_favs[i].nombre);
+        }
+      },
+      (error) => {
+        console.error('Error al obtener los favoritos:', error);
+      }
+
+    );
+  }
+
+  cargarDatosFavorito(favorito: any): void {
+    this.weatherService.cargarDatosCiudad(favorito).subscribe(
+      (place: Place) => {
+        this.favoritos.push(place);
+        console.log(place);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+
+
+
 }

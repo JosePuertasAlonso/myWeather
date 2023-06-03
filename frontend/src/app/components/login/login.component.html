@@ -36,18 +36,15 @@
       <h2>Still not registered? Join us</h2>
       <label>
         <span>Username</span>
-        <input type="text" />
-      </label>
-      <label>
-        <span>Email</span>
-        <input type="email" />
+        <input type="text" [(ngModel)]="username" name="username" #usernameInput />
       </label>
       <label>
         <span>Password</span>
-        <input type="password" />
+        <input type="password" [(ngModel)]="password" name="password" #passwordInput />
       </label>
-      <button type="button" class="submit">Sign Up</button>
+      <button type="button" class="submit" (click)="agregarUsuario()">Sign Up</button>
     </div>
+
   </div>
 </div>
 

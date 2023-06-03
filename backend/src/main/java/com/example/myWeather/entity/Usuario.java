@@ -1,45 +1,41 @@
 package com.example.myWeather.entity;
 
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotBlank(message = "Name is mandatory")
-    @Column(name = "name")
     private String username;
-
-    @NotBlank(message = "Name is mandatory")
-    @Column(name = "password")
     private String password;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Favorite> favorites;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Favorito> favoritos = new ArrayList<>();
 
     public Usuario() {
     }
 
-    public Usuario(String username, String password, List<Favorite> favorites) {
+    public Usuario(String username, String password, List<Favorito> favoritos) {
         this.username = username;
         this.password = password;
-        this.favorites = favorites;
-        for (Favorite fav : favorites) {
-            fav.setUsuario(this);
-        }
+        this.favoritos = favoritos;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,15 +46,30 @@ public class Usuario {
     public void setUsername(String username) {
         this.username = username;
     }
-    public List<Favorite> getFavorites() {
-        return favorites;
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setFavorites(List<Favorite> favorites) {
-        this.favorites = favorites;
-        for (Favorite fav : favorites) {
-            fav.setUsuario(this);
-        }
+    public void setPassword(String password) {
+        this.password = password;
     }
-    
+
+    public List<Favorito> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(List<Favorito> favoritos) {
+        this.favoritos = favoritos;
+    }
+
+    public void agregarFavorito(Favorito favorito) {
+        favoritos.add(favorito);
+        favorito.setUsuario(this);
+    }
+
+    public void eliminarFavorito(Favorito favorito) {
+        favoritos.remove(favorito);
+        favorito.setUsuario(null);
+    }
 }

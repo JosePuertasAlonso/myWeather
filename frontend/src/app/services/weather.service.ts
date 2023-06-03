@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, switchMap } from 'rxjs';
 import { Place } from './place';
-
+import { Usuario } from './usuario';
 @Injectable({
   providedIn: 'root'
 })
@@ -89,7 +89,44 @@ export class WeatherService {
     );
   }
   obtenerUsuario(username: string): Observable<any> {
-    const url = `${this.springUrl}/users/search/findByUsername?username=`+ username; // Reemplaza 'auth' con la URL adecuada para la autenticación en tu backend de Spring Boot
+    const url = `${this.springUrl}/usuarios/buscar/`+ username; // Reemplaza 'auth' con la URL adecuada para la autenticación en tu backend de Spring Boot
+    return this.http.get(url)
+  }
+
+  cargarDatosUsuario(username: string): Observable<Usuario> {
+    const url = `${this.springUrl}/usuarios/buscar/${username}`;
+
+    return this.http.get<any>(url).pipe(
+      map((response: any) => {
+        const usuario: Usuario = {
+          id: response.id,
+          username: response.username,
+          password: response.password,
+          favorites: response.favorites
+        };
+        return usuario;
+      })
+    );
+  }
+
+
+  agregarUsuario(usuario: any): Observable<any> {
+    return this.http.post("http://localhost:8080/api/usuarios", usuario);
+  }
+
+  actualizarUsuario(username : string, usuario:any): Observable<any> {
+    var iduser: number=0;
+    this.obtenerUsuario(username).subscribe(
+      (response: any) => {
+        iduser = response.id;
+      },
+    );
+
+    return this.http.put("http://localhost:8080/api/usuarios/"+ iduser.toString(), usuario);
+  }
+
+  obtenerFavoritos(idUser: string): Observable<any> {
+    const url = `${this.springUrl}/usuarios/${idUser}/favoritos`;
     return this.http.get(url)
   }
 }

@@ -19,9 +19,9 @@
     <h1 class="title">Your Favorites</h1>
     <hr>
   </div>
-  <div class  ="main_places">
-    <div *ngIf="favorites.length != 0">
-      <li [routerLink]="['/place', fav.name]" [state]="{ place: fav }" style="background-image: url({{fav.image}});" class="card" *ngFor="let fav of favorites">
+
+    <div *ngIf="favoritos.length != 0"class  ="favorite_places">
+      <li [routerLink]="['/place', fav.name]" [state]="{ place: fav }" style="background-image: url({{fav.image}});" class="card" *ngFor="let fav of favoritos">
         <div class="info-card">
           <p class="nombre-ciudad">{{fav.name}}</p>
           <div style="display: flex;flex-direction: column; align-items: center;padding: 0;">
@@ -31,10 +31,10 @@
         </div>
       </li>
     </div>
-    <div *ngIf="favorites.length == 0">
+    <div *ngIf="favoritos.length == 0">
       <p>No tienes ninguna ciudad guardada como favorita.Buscala.</p>
     </div>
 
-  </div>
+
 </div>
 

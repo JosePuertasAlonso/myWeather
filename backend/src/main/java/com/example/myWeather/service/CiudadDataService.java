@@ -1,4 +1,4 @@
-package com.example.myWeather.services;
+package com.example.myWeather.service;
 
 import java.io.IOException;
 import java.util.ArrayList;

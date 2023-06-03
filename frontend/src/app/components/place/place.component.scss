@@ -5,17 +5,9 @@
     height: 30em;
     background-size: cover;
     background-position: center;
-
+    margin-bottom: 2em;
 }
 
-.place_img::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
 .place_data{
   position: relative;
   left: 25%;
@@ -38,16 +30,26 @@
       color:black;
       font-size: 2.5em;
       opacity: 1;
+      margin-top: 1em;
     }
     .place_state{
       margin:0;
-      margin-top: .5em;
+      margin-top: 1em;
       margin-left: 1em;
       color:black;
       font-size: 1.3em;
       opacity: 1;
     }
+    #fav{
+      font-size: 2em;
+      margin-left: .6em;
+      margin-top: 1.1em;
 
+      &:hover {
+        cursor: pointer;
+        color: darkgoldenrod;
+      }
+    }
     #icon{
       display: flex;
       align-items: center;
@@ -77,11 +79,13 @@
 .more-details{
   display: flex;
   justify-content: center;
+  margin-bottom: 2em;
   .section{
     background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(90, 90, 90));
     padding: 1em;
     margin-left: 1em;
     border-radius: 1em;
+    padding-bottom: 2em;
     h2{
       font-size: 1.5em;
       margin-left: .5em;
@@ -98,7 +102,7 @@
   flex-direction: row;
   justify-content: center;
   margin:1em;
-  margin-bottom: 3em;
+  margin-bottom: 5em;
   .hours {
     display: inline-block;
     white-space: normal;

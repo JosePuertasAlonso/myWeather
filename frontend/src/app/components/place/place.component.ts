@@ -96,5 +96,8 @@ export class PlaceComponent implements OnInit{
     });
   }
 
+  añadirCiudadFavoritos(ciudad: string): void {
+
+  }
 
 }
