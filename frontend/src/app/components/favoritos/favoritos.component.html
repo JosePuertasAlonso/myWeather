@@ -1,0 +1,16 @@
+<div class="title-cont">
+  <h1 class="title">Your Favorite Cities ({{favoritos.length}})</h1>
+  <hr>
+</div>
+
+<div class  ="favorite_places">
+  <li [routerLink]="['/place', principal.name]" [state]="{ place: principal }" style="background-image: url({{principal.image}});" class="card" *ngFor="let principal of favoritos">
+      <div class="info-card">
+        <p class="nombre-ciudad">{{principal.name}}</p>
+        <div style="display: flex;flex-direction: column; align-items: center;padding: 0;">
+          <i id="icon" class="{{principal.icon}}" id="icon"></i>
+          <p class="temp-ciudad">{{principal.temp}}ºC</p>
+        </div>
+      </div>
+  </li>
+</div>

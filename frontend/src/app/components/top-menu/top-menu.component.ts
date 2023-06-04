@@ -12,6 +12,7 @@ export class TopMenuComponent {
   ciudad: string = "";
   weatherData: any;
   desplegable = false;
+  mostrardialog = false;
 
   constructor(
     private weatherService: WeatherService,
@@ -31,7 +32,17 @@ export class TopMenuComponent {
 
     }
   }
+
+
+  mostrarDialog() {
+    this.mostrardialog = true;
+  }
+  ocultarDialog() {
+    this.mostrardialog = false;
+  }
+
   cerrarSesion() {
     this.authService.autenticado = false;
+    this.ocultarDialog();
   }
 }

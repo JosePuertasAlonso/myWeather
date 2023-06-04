@@ -48,7 +48,31 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+    @DeleteMapping("{usuarioId}/favoritos/{favoritoId}")
+    public ResponseEntity<?> eliminarFavorito(
+            @PathVariable Long usuarioId,
+            @PathVariable Long favoritoId) {
+        Usuario usuario = usuarioService.obtenerUsuario(usuarioId);
+        if (usuario != null) {
+            List<Favorito> favoritos = usuario.getFavoritos();
+            Favorito favoritoToRemove = null;
+            for (Favorito fav : favoritos) {
+                if (fav.getId().equals(favoritoId)) {
+                    favoritoToRemove = fav;
+                    break;
+                }
+            }
+            if (favoritoToRemove != null) {
+                usuario.eliminarFavorito(favoritoToRemove);
+                usuarioService.guardarUsuario(usuario);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/{usuarioId}/favoritos")
     public ResponseEntity<List<Favorito>> obtenerFavoritosPorUsuario(@PathVariable Long usuarioId) {

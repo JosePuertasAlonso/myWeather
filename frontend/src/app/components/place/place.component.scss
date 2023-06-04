@@ -40,7 +40,7 @@
       font-size: 1.3em;
       opacity: 1;
     }
-    #fav{
+    #nofav{
       font-size: 2em;
       margin-left: .6em;
       margin-top: 1.1em;
@@ -50,10 +50,22 @@
         color: darkgoldenrod;
       }
     }
+
+    #fav{
+      font-size: 2em;
+      margin-left: .6em;
+      margin-top: 1.1em;
+      color: darkgoldenrod;
+
+      &:hover {
+        cursor: pointer;
+        color: black;
+      }
+    }
     #icon{
       display: flex;
       align-items: center;
-      margin-left: 3em;
+      margin-left: 2em;
       border-radius: 25px;
       font-size: 9em;
       color:black;
@@ -61,6 +73,12 @@
       border: 1px solid;
     }
 
+    button{
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
 
   }
 

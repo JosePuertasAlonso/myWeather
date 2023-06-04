@@ -2,10 +2,14 @@
   <div class="place_img" style="background-image: url({{imagenUrl}})">
     <div class="place_data">
       <div class="container-1">
-        <div style="width: 12em;">
-          <div style="display: flex;">
-            <p class="place_name">{{place.name}}</p>
-            <i class="far fa-star"id="fav"></i>
+        <div style="width: 25em;">
+          <div style="display: flex;"  *ngIf="isFavorito">
+            <p class="place_name">{{ place.name }}</p>
+            <button (click)="quitarFavorito()"><i class="fas fa-star" id="fav"></i></button>
+          </div>
+          <div style="display: flex;"  *ngIf="!isFavorito">
+            <p class="place_name">{{ place.name }}</p>
+            <button (click)="anadirFavorito()"><i class="far fa-star" id="nofav"></i></button>
           </div>
           <p class="place_state">{{apiPlace.weather[0].main}}</p>
         </div>

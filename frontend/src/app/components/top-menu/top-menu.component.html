@@ -1,7 +1,7 @@
 <div class="menu">
-  <li routerLink="/main">Inicio</li>
+  <li routerLink="/main">Home</li>
   <input class="search_input" type="text" [(ngModel)]="ciudad" placeholder="Buscar ciudad" />
-  <button class="search_button" (click)="buscarTiempo()">Buscar</button>
+  <button class="search_button" (click)="buscarTiempo()">Search</button>
 
   <div *ngIf="authService.isAutenticado(); else loginButton" (mouseenter)="desplegable = true" (mouseleave)="desplegable = false">    <!-- Botón y acción para cerrar sesión -->
       <div class="logout">
@@ -9,16 +9,28 @@
         <p class="label">{{authService.usuario.username}}</p>
         <i id="arrow" class="fa-solid fa-caret-down"></i>
       </div>
-    <div (click)="cerrarSesion()" class="options" *ngIf="desplegable">
+    <div (click)="mostrarDialog()" class="options" *ngIf="desplegable">
       <i id="icon" class="fa-solid fa-power-off"></i>
-      <p>Cerrar Sesion</p>
+      <p>Log Out</p>
     </div>
   </div>
 
   <ng-template #loginButton>
     <div [routerLink]="['/login']" class="login">
         <i id="icon" class="fa-solid fa-right-to-bracket"></i>
-        <p class="label">Iniciar sesión</p>
+        <p class="label">Log In</p>
     </div>
   </ng-template>
+</div>
+<div class="background-overlay" [hidden]="!mostrardialog"></div>
+<div class="dialog" [hidden]="!mostrardialog">
+  <div style="display: flex; flex-direction: column;">
+    <label class="titulo" >Log out</label>
+    <hr style="width: 90%;">
+    <label class="mensaje">Are you sure you want to log out?</label>
+    <div class="botones">
+      <button class="aceptar" (click)="cerrarSesion()">Log out</button>
+      <button class="cancelar" (click)="ocultarDialog()">Cancel</button>
+    </div>
+  </div>
 </div>

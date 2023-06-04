@@ -42,10 +42,21 @@
         <span>Password</span>
         <input type="password" [(ngModel)]="password" name="password" #passwordInput />
       </label>
-      <button type="button" class="submit" (click)="agregarUsuario()">Sign Up</button>
-    </div>
 
+      <button type="button" class="submit" (click)="agregarUsuario()">Sign Up</button>
+      <span id="errorMessageSignUp" class="error-message"></span>
+
+    </div>
   </div>
 </div>
-
-
+<div class="background-overlay" [hidden]="!backgroundisabled"></div>
+<div class="dialog" [hidden]="!mostrarexito">
+  <label class="titulo" >Sign Up Information</label>
+  <label class="mensaje">You have been registered successfully</label>
+  <button class="cerrar" (click)="ocultarDialog()">Cerrar</button>
+</div>
+<div class="dialog" [hidden]="!mostrarerror">
+  <label class="titulo" >Sign Up Information</label>
+  <label class="mensaje">Username is in use. Please try again with another username</label>
+  <button class="cerrar" (click)="ocultarDialog()">Cerrar</button>
+</div>

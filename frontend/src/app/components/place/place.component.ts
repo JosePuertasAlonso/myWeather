@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WeatherService } from '../../services/weather.service';
 import { Place } from '../../services/place';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-place',
@@ -14,18 +15,21 @@ export class PlaceComponent implements OnInit{
   apiPlace:any;
   apiPlaceHours:any;
   imagenUrl: any;
-
+  isFavorito: boolean = false;
+  idPlace: any;
 
   constructor(
     private route: ActivatedRoute,
     private weatherService: WeatherService,
-    private location: Location
+    private location: Location,
+    public authService: AuthService
     ) { }
 
   ngOnInit() {
     this.getPlace();
     this.getApiPlace();
     this.obtenerImagen();
+
   }
 
 
@@ -36,6 +40,9 @@ export class PlaceComponent implements OnInit{
         this.weatherService.cargarDatosCiudad(name)
           .subscribe((place: Place) => {
             this.place = place;
+            if(this.authService.isAutenticado()){
+              this.comprobarFavoritos(this.authService.usuario.id);
+            }
           }, (error) => {
             console.error(error);
           });
@@ -100,4 +107,52 @@ export class PlaceComponent implements OnInit{
 
   }
 
+  comprobarFavoritos(id_user:any){
+
+      this.weatherService.obtenerFavoritos(id_user).subscribe(
+        (data: any[]) => {
+          console.log("Favoritos:", data);
+          this.isFavorito = false;
+          for (let i = 0; i < data.length; i++) {
+            if(this.place && data[i].nombre == this.place.name){
+              this.isFavorito = true;
+              this.idPlace = data[i].id;
+            }
+          }
+        },
+        (error) => {
+          console.error('Error al obtener los favoritos:', error);
+        }
+
+      );
+  }
+
+  anadirFavorito(){
+    if(this.place){
+      const ciudad = {
+        nombre: this.place.name,
+      };
+    this.weatherService.anadirFavorito(this.authService.usuario.id,ciudad).subscribe(
+      response => {
+        console.log('Ciudad agregado a favoritos:', response);
+        this.getPlace();
+      },
+      error => {
+        console.error('Error al agregar el ciudad a favoritos:', error);
+      }
+    );
+    }
+  }
+
+  quitarFavorito(){
+    this.weatherService.quitarFavorito(this.authService.usuario.id,this.idPlace).subscribe(
+      response => {
+        console.log('Ciudad eliminada de favoritos:', response);
+        this.getPlace();
+      },
+      error => {
+        console.error('Error al eliminar la ciudad de favoritos:', error);
+      }
+    );
+  }
 }

@@ -92,7 +92,10 @@ export class WeatherService {
     const url = `${this.springUrl}/usuarios/buscar/`+ username; // Reemplaza 'auth' con la URL adecuada para la autenticación en tu backend de Spring Boot
     return this.http.get(url)
   }
-
+  obtenerUsuarios(): Observable<any> {
+    const url = `${this.springUrl}/usuarios`; // Reemplaza 'auth' con la URL adecuada para la autenticación en tu backend de Spring Boot
+    return this.http.get(url)
+  }
   cargarDatosUsuario(username: string): Observable<Usuario> {
     const url = `${this.springUrl}/usuarios/buscar/${username}`;
 
@@ -128,5 +131,15 @@ export class WeatherService {
   obtenerFavoritos(idUser: string): Observable<any> {
     const url = `${this.springUrl}/usuarios/${idUser}/favoritos`;
     return this.http.get(url)
+  }
+
+  anadirFavorito(id: any, place: any): Observable<any> {
+    const url = `${this.springUrl}/usuarios/${id}/favoritos`;
+    return this.http.post(url, place)
+  }
+
+  quitarFavorito(usuarioId: number, placeId: any): Observable<any> {
+    const url = `${this.springUrl}/usuarios/${usuarioId}/favoritos/${placeId}`;
+    return this.http.delete(url);
   }
 }

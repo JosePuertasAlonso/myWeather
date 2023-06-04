@@ -16,6 +16,7 @@ import { CardComponent } from './components/card/card.component';
 import { CardWeatherhourComponent } from './components/card-weatherhour/card-weatherhour.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FavoritosComponent } from './components/favoritos/favoritos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TopMenuComponent,
     CardComponent,
     CardWeatherhourComponent,
-    LoginComponent
+    LoginComponent,
+    FavoritosComponent
     ],
   imports: [
     BrowserModule,

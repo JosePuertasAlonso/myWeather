@@ -1,0 +1,65 @@
+.title-cont{
+  position: relative;
+  left: 10%;
+  width: 80%;
+  .title{
+    margin-top: 1em;
+    font-size: 2.5em;
+  }
+
+}
+.favorite_places {
+  width: 70%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  height: 20rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 1em;
+  margin-bottom: 3em;
+  cursor: pointer;
+  padding-bottom: 4em;
+
+  .card {
+    border-radius: 1em;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    transition: all .8s cubic-bezier(.25,.4,.45,1.4);
+    list-style: none;
+    width: 20em;
+    height: 25em;
+    margin-bottom: 1em;
+    .info-card {
+      margin-left: 2em;
+      width: 80%;
+      height: 80%;
+      padding-top: .05em;
+      background-color: rgb(255, 255, 255, 0.8);
+      border-radius: 1rem;
+      margin-top: 1em;
+      padding-top: 1em;
+      .nombre-ciudad {
+        margin-top: 1em;
+        padding-left: 0.5em;
+        font-size: 2em;
+      }
+
+      .temp-ciudad {
+        margin-top: 1em;
+        font-size: 1.8em;
+      }
+
+      #icon{
+        margin-top: .5em;
+        font-size: 3em;
+      }
+    }
+  }
+
+  .card:hover .info-card {
+    margin-left: 2em;
+    border-radius: 1rem;
+  }
+}

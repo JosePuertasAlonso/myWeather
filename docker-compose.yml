@@ -1,0 +1,31 @@
+version: '3.8'
+
+services: 
+  frontend:
+    container_name: myweather-frontend
+    build: ./frontend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  backend:
+    container_name: myweather-backend
+    build: ./backend
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+
+  postgres:
+    container_name: myweather-postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=db
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    volumes: 
+      - ./data:/var/lib/postgresql/data
+    restart: unless-stopped

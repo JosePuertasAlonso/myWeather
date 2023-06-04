@@ -20,8 +20,8 @@
     <hr>
   </div>
 
-    <div *ngIf="favoritos.length != 0"class  ="favorite_places">
-      <li [routerLink]="['/place', fav.name]" [state]="{ place: fav }" style="background-image: url({{fav.image}});" class="card" *ngFor="let fav of favoritos">
+    <div *ngIf="favoritos.length != 0" class ="favorite_places">
+      <li [routerLink]="['/place', fav.name]" [state]="{ place: fav }" style="background-image: url({{fav.image}});" class="card" *ngFor="let fav of favoritos.slice(0,4)">
         <div class="info-card">
           <p class="nombre-ciudad">{{fav.name}}</p>
           <div style="display: flex;flex-direction: column; align-items: center;padding: 0;">
@@ -30,9 +30,13 @@
           </div>
         </div>
       </li>
+      <div class="ver_mas" *ngIf="favoritos.length > 3" [routerLink]="['/favoritos']">
+        <i id="icon" class="fas fa-chevron-right"></i>
+        <p class="label">Ver mas</p>
+      </div>
     </div>
-    <div *ngIf="favoritos.length == 0">
-      <p>No tienes ninguna ciudad guardada como favorita.Buscala.</p>
+    <div *ngIf="favoritos.length == 0" class ="favorite_places">
+      <p style="font-size: 1.4em;">Haven't you saved any city in favorites yet? Search it with the search bar</p>
     </div>
 
 
