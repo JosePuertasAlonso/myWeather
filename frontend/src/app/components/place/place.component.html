@@ -3,11 +3,14 @@
     <div class="place_data">
       <div class="container-1">
         <div style="width: 25em;">
-          <div style="display: flex;"  *ngIf="isFavorito">
+          <div style="display: flex;"  *ngIf=" !authService.isAutenticado()">
+            <p class="place_name">{{ place.name }}</p>
+          </div>
+          <div style="display: flex;"  *ngIf="isFavorito && authService.isAutenticado()">
             <p class="place_name">{{ place.name }}</p>
             <button (click)="quitarFavorito()"><i class="fas fa-star" id="fav"></i></button>
           </div>
-          <div style="display: flex;"  *ngIf="!isFavorito">
+          <div style="display: flex;"  *ngIf="!isFavorito && authService.isAutenticado()">
             <p class="place_name">{{ place.name }}</p>
             <button (click)="anadirFavorito()"><i class="far fa-star" id="nofav"></i></button>
           </div>
