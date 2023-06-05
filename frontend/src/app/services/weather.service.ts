@@ -18,7 +18,9 @@ export class WeatherService {
     'Snow': 'wi wi-snow',
     'Drizzle': 'wi wi-rain',
     'Thunderstorm': 'wi wi-thunderstorm',
-    'Mist': 'wi wi-fog'
+    'Mist': 'wi wi-fog',
+    'Fog': 'wi wi-fog'
+
   };
   constructor(private http: HttpClient) {}
 
